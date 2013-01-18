@@ -1,6 +1,6 @@
 /*
  * ROFS - The read-only filesystem for FUSE.
- * Copyright 2005,2006,2008 Matthew Keller. kellermg@potsdam.edu and others.
+ * Copyright 2005,2006,2008 Matthew Keller. m@cognusion.com and others.
  * v2008.09.24
  * 
  * Mount any filesytem, or folder tree read-only, anywhere else.

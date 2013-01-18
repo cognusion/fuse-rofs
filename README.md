@@ -3,7 +3,7 @@ fuse-rofs
 
 ROFS is the Read-Only File System for FUSE. You can mount it over any filesystem that Linux can mount.
 
-Copyright 2005,2006,2008 Matthew Keller. kellermg@potsdam.edu and others.
+Copyright 2005,2006,2008 Matthew Keller. m@cognusion.com and others.
 
 Mount any filesytem, or folder tree read-only, anywhere else.
 No warranties. No guarantees. No lawyers.
