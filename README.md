@@ -10,7 +10,7 @@ No warranties. No guarantees. No lawyers.
 
 I read (and borrowed) a lot of other FUSE code to write this. 
 Similarities possibly exist- Wholesale reuse as well of other GPL code.
-Special mention to RÃ©mi Flament and his loggedfs.
+Special mention to Rémi Flament and his loggedfs.
 
 Consider this code GPLv2.
 
