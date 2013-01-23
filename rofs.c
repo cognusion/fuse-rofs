@@ -68,10 +68,11 @@ static char* translate_path(const char* path)
 static int callback_getattr(const char *path, struct stat *st_data)
 {
     int res;
-	path=translate_path(path);
+	char * ipath;
+	ipath=translate_path(path);
 	
-    res = lstat(path, st_data);
-    free(path);
+    res = lstat(ipath, st_data);
+    free(ipath);
     if(res == -1) {
         return -errno;
     }
@@ -81,10 +82,11 @@ static int callback_getattr(const char *path, struct stat *st_data)
 static int callback_readlink(const char *path, char *buf, size_t size)
 {
    	int res;
-	path=translate_path(path);
+	char *ipath;
+	ipath=translate_path(path);
 	
-    res = readlink(path, buf, size - 1);
-    free(path);
+    res = readlink(ipath, buf, size - 1);
+    free(ipath);
     if(res == -1) {
         return -errno;
     }
@@ -100,11 +102,12 @@ static int callback_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 
     (void) offset;
     (void) fi;
+    char *ipath;
 
-    path=translate_path(path);
+    ipath=translate_path(path);
 
-    dp = opendir(path);
-    free(path);
+    dp = opendir(ipath);
+    free(ipath);
     if(dp == NULL) {
         res = -errno;
         return res;
@@ -213,12 +216,12 @@ static int callback_open(const char *path, struct fuse_file_info *finfo)
 	if ((flags & O_WRONLY) || (flags & O_RDWR) || (flags & O_CREAT) || (flags & O_EXCL) || (flags & O_TRUNC) || (flags & O_APPEND)) {
       return -EROFS;
   	}
-  	
-  	path=translate_path(path);
+        char *ipath;	
+  	ipath=translate_path(path);
   
-    res = open(path, flags);
+    res = open(ipath, flags);
  
-    free(path);
+    free(ipath);
     if(res == -1) {
         return -errno;
     }
@@ -231,10 +234,11 @@ static int callback_read(const char *path, char *buf, size_t size, off_t offset,
     int fd;
     int res;
     (void)finfo;
+    char *ipath;
 
-	path=translate_path(path);
-    fd = open(path, O_RDONLY);
-    free(path);
+    ipath=translate_path(path);
+    fd = open(ipath, O_RDONLY);
+    free(ipath);
     if(fd == -1) {
         res = -errno;
         return res;
@@ -260,11 +264,12 @@ static int callback_write(const char *path, const char *buf, size_t size, off_t 
 
 static int callback_statfs(const char *path, struct statvfs *st_buf)
 {
-  int res;
-  path=translate_path(path);
+  int res;	
+  char *ipath;
+  ipath=translate_path(path);
   
   res = statvfs(path, st_buf);
-  free(path);
+  free(ipath);
   if (res == -1) {
     return -errno;
   }
@@ -289,7 +294,8 @@ static int callback_fsync(const char *path, int crap, struct fuse_file_info *fin
 static int callback_access(const char *path, int mode)
 {
 	int res;
-  	path=translate_path(path);
+	char *ipath;
+  	ipath=translate_path(path);
   	
   	/* Don't pretend that we allow writing
   	 * Chris AtLee <chris@atlee.ca>
@@ -297,8 +303,8 @@ static int callback_access(const char *path, int mode)
     if (mode & W_OK)
         return -EROFS;
         
-  	res = access(path, mode);
-	free(path);
+  	res = access(ipath, mode);
+	free(ipath);
   	if (res == -1) {
     	return -errno;
   	}
@@ -324,10 +330,11 @@ static int callback_setxattr(const char *path, const char *name, const char *val
 static int callback_getxattr(const char *path, const char *name, char *value, size_t size)
 {
     int res;
+    char *ipath;
     
-    path=translate_path(path);
-    res = lgetxattr(path, name, value, size);
-    free(path);
+    ipath=translate_path(path);
+    res = lgetxattr(ipath, name, value, size);
+    free(ipath);
     if(res == -1) {
         return -errno;
     }
@@ -340,10 +347,11 @@ static int callback_getxattr(const char *path, const char *name, char *value, si
 static int callback_listxattr(const char *path, char *list, size_t size)
 {
 	int res;
+	char *ipath;
 	
-	path=translate_path(path);
-	res = llistxattr(path, list, size);
-   	free(path);
+	ipath=translate_path(path);
+	res = llistxattr(ipath, list, size);
+   	free(ipath);
     if(res == -1) {
         return -errno;
     }
