@@ -14,7 +14,7 @@ Special mention to Rémi Flament and his loggedfs.
 
 Consider this code GPLv2.
 
-Compile: gcc -o rofs -Wall -ansi -W -std=c99 -g -ggdb -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -lfuse main.c
+Compile: `gcc -o rofs -Wall -ansi -W -std=c99 -g -ggdb -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -lfuse rofs.c`
 
 Mount: rofs readwrite_filesystem mount_point
 
